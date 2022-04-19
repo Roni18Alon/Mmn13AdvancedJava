@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Mmn13AdvancedJava.iml" filepath="$PROJECT_DIR$/Mmn13AdvancedJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Q1/Q1.iml" filepath="$PROJECT_DIR$/Q1/Q1.iml" />
+    </modules>
+  </component>
+</project>
