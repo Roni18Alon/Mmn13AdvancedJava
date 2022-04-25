@@ -42,6 +42,9 @@ public class ShapesCreationController<E> {
 
     private Shapes chosenShape;
 
+    public void initialize() {
+        undoButton.setDisable(true);
+    }
 
     @FXML
     void clearPane(ActionEvent event) {
@@ -89,6 +92,10 @@ public class ShapesCreationController<E> {
         if (shapesList.size() != 0) {
             shapesList.remove(shapesList.size() - 1); //remove last shape from arraylist
             pane.getChildren().remove(pane.getChildren().size() - 1);
+            if (pane.getChildren().size()==0) //if we have two shapes we will press twice
+            {
+                undoButton.setDisable(true);
+            }
         } else {
             undoButton.setDisable(true);
         }//can't undo anymore because we undo all the shapes in pane
@@ -99,30 +106,36 @@ public class ShapesCreationController<E> {
         endX = event.getX();
         endY = event.getY();
         System.out.println("create");
-        switch (chosenShape) {
-            case line:
-                System.out.println("draw line");
-                shape = new Line(startX, startY, endX, endY);
-                shape.setStroke(colorPick.getValue());
-                break;
-            case rectangle:
-                System.out.println("draw rectangle");
-                shape = new Rectangle(startX, startY, abs(endX - startX), abs(endY - startY));
-                break;
-            case ellipse:
-                System.out.println("draw ellipse");
-                double eRadius, middleX, middleY, eRadius2;
-                eRadius = Math.sqrt(Math.pow((startX - endX), 2) + Math.pow((startY - endY), 2)) / 2;
-                middleX = (startX + endX) / 2;
-                middleY = (startY + endY) / 2;
-                eRadius2 = abs(middleY - endY);
-                shape = new Ellipse(middleX, middleY, eRadius, eRadius2);
-                break;
+        if (pane.getChildren().size()==0){
+            undoButton.setDisable(true);
         }
-        drawShape();
+        if (endX>=0 && endY>=0 && endY<=pane.getHeight() &&endX<=pane.getWidth()){ //if the released point is outside of pane boarders - do not create shape
+            switch (chosenShape) {
+                case line:
+                    System.out.println("draw line");
+                    shape = new Line(startX, startY, endX, endY);
+                    shape.setStroke(colorPick.getValue());
+                    break;
+                case rectangle:
+                    System.out.println("draw rectangle");
+                    shape = new Rectangle(startX, startY, abs(endX - startX), abs(endY - startY));
+                    break;
+                case ellipse:
+                    System.out.println("draw ellipse");
+                    double eRadius, middleX, middleY, eRadius2;
+                    eRadius = Math.sqrt(Math.pow((startX - endX), 2) + Math.pow((startY - endY), 2)) / 2;
+                    middleX = (startX + endX) / 2;
+                    middleY = (startY + endY) / 2;
+                    eRadius2 = abs(middleY - endY);
+                    shape = new Ellipse(middleX, middleY, eRadius, eRadius2);
+                    break;
+            }
+            drawShape();
+        }
     }
 
     private void drawShape() {
+
         if (chosenShape.equals(Shapes.line)) {
             shape.setStroke(colorPick.getValue());
         } else {
@@ -135,6 +148,7 @@ public class ShapesCreationController<E> {
         }
         pane.getChildren().add(shape);
         shapesList.add((E) shape);
+        undoButton.setDisable(false);
         System.out.println("shape size :" + shapesList.size());
     }
 }

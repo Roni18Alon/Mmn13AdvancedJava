@@ -17,9 +17,9 @@
    <left>
       <VBox prefHeight="351.0" prefWidth="78.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="lineButton" mnemonicParsing="false" onAction="#createLine" prefHeight="34.0" prefWidth="80.0" text="Line" />
-            <Button fx:id="recButton" mnemonicParsing="false" onAction="#createRectangle" prefHeight="40.0" prefWidth="78.0" text="Rectangle" />
-            <Button fx:id="elliButton" mnemonicParsing="false" onAction="#createEllipse" prefHeight="42.0" prefWidth="79.0" text="Ellipse" />
+            <Button mnemonicParsing="false" onAction="#createLine" prefHeight="34.0" prefWidth="80.0" text="Line" />
+            <Button mnemonicParsing="false" onAction="#createRectangle" prefHeight="40.0" prefWidth="78.0" text="Rectangle" />
+            <Button mnemonicParsing="false" onAction="#createEllipse" prefHeight="42.0" prefWidth="79.0" text="Ellipse" />
             <CheckBox fx:id="fillButton" mnemonicParsing="false" onAction="#fillShape" text="Fill Shape" />
          </children>
       </VBox>
