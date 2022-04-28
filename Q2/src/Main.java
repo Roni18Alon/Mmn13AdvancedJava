@@ -1,3 +1,8 @@
+/*
+Author: Roni Alon 315565176
+Main class starts the GUI of  mmn 13 q2 - 4 in lines game .
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
