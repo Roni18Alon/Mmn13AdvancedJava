@@ -1,8 +1,3 @@
-/*
-Author: Roni Alon 315565176
-ShapesCreation class starts the javaFX GUI for mmn 13 q1 - draw shapes.
- */
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,12 +5,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class ShapesCreation extends Application{
+public class Main extends Application{
     public void start(Stage stage) throws Exception{
         Parent root = (Parent)
-                FXMLLoader.load(getClass().getResource("ShapesCreation.fxml"));
+                FXMLLoader.load(getClass().getResource("GameBoard.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("ShapesCreation");
+        stage.setTitle("4 In Line Game");
         stage.setScene(scene);
         stage.show();
     }
