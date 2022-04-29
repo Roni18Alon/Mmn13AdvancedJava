@@ -10,9 +10,9 @@ public class Board {
     private final int[][] logicalBoard;
     private final int ROW = 6;
     private final int COL = 7;
-    private final int FIRST_PLAYER=1;
-    private final int SECOND_PLAYER=2;
-    private final int EMPTY_CELL=0;
+    private final int FIRST_PLAYER = 1;
+    private final int SECOND_PLAYER = 2;
+    private final int EMPTY_CELL = 0;
     private final Player firstPlayer;
     private final Player secondPlayer;
     private Player currentPlayer;
@@ -26,7 +26,7 @@ public class Board {
     }
 
 
-   //get your turn and place your player id in the next optional cell of chosen column
+    //get your turn and place your player id in the next optional cell of chosen column
     public Player playTurn(int row, int col) {
         // fill the right cell in logical board in the id of this player
         logicalBoard[row][col] = this.currentPlayer.getPlayerId();
@@ -36,7 +36,7 @@ public class Board {
 
     }
 
-   //Check and returns the next empty cell in given column if we can't find return min val of integer
+    //Check and returns the next empty cell in given column if we can't find return min val of integer
     public int emptySpace(int col) {
         int cell = -1;
         for (int i = ROW - 1; i >= 0; i--) {
@@ -110,15 +110,24 @@ public class Board {
     }
 
     //Clear the logical board by initialize all values to 0
-    public void clearLogicalMatrix(){
-       if (logicalBoard!=null){
-           for(int i=0;i<logicalBoard.length;i++){
-               for(int j=0;j<logicalBoard[0].length;j++)
-               {
-                   logicalBoard[i][j]=EMPTY_CELL;
-               }
-           }
-       }
+    public void clearLogicalMatrix() {
+        if (logicalBoard != null) {
+            for (int i = 0; i < logicalBoard.length; i++) {
+                for (int j = 0; j < logicalBoard[0].length; j++) {
+                    logicalBoard[i][j] = EMPTY_CELL;
+                }
+            }
+        }
+    }
+
+    //returns true if the board is full and no one wins
+    public boolean fullBoard() {
+        for (int j = 0; j < logicalBoard[0].length; j++) {
+            if (logicalBoard[0][j] == EMPTY_CELL) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

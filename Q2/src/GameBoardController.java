@@ -3,11 +3,9 @@ Author: Roni Alon 315565176
 GameBoardController class controls the javaFX GUI for mmn 13 q2 - 4 in lines game .
  */
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DialogEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -55,10 +53,9 @@ public class GameBoardController {
     @FXML
     private Button seventhButton;
 
-    public EventHandler<DialogEvent> initialize() {
+    public void initialize() {
         b = new Board();//create board
         restart();
-        return null;
     }
 
     @FXML
@@ -124,8 +121,11 @@ public class GameBoardController {
         if (row!=Integer.MIN_VALUE) {
             current = b.playTurn(row, col);
             createShape(row, col, current.getPlayerColor());
-            if (b.isWinner(current)) {
+            if (b.isWinner(current)) { //check if we have w winner
                 alertWinner(current);
+            }
+            if(b.fullBoard()){ //check if board is full
+                fullBoardAlert();
             }
         }
     }
@@ -136,19 +136,19 @@ public class GameBoardController {
         a.setTitle("WINNER OF THE GAME");
         a.setHeaderText("winner");
         a.setContentText("The winner is player number " + current.getPlayerId());
-        a.showAndWait();
-        a.setOnCloseRequest(initialize());
+        a.show();
+        a.setOnCloseRequest(event->initialize());
     }
 
    //restart the board - clear all circles we draw
-    public void restart() {
+    private void restart() {
         boardGrid.getChildren().removeAll(circleList);
         if (circleList !=null) circleList.clear();
         b.clearLogicalMatrix();//clear logical board
         setEnable();
     }
 
-    public void setEnable() {
+    private void setEnable() {
         firstButton.setDisable(false);
         secondButton.setDisable(false);
         thirdButton.setDisable(false);
@@ -156,5 +156,14 @@ public class GameBoardController {
         fifthButton.setDisable(false);
         sixthButton.setDisable(false);
         seventhButton.setDisable(false);
+    }
+
+    //if we found a winner raise an alert
+    private void fullBoardAlert() {
+        a = new Alert(Alert.AlertType.INFORMATION);
+        a.setHeaderText("Board is full");
+        a.setContentText("Board is full with no winner! ");
+        a.show();
+        a.setOnCloseRequest(event->initialize());
     }
 }
