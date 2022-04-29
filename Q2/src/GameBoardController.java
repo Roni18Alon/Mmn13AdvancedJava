@@ -28,6 +28,7 @@ public class GameBoardController {
     private final int FIFTH_COL=5;
     private final int SIXTH_COL=6;
     private final int SEVEN_COL=7;
+    private final int NUM_OF_ROW=7; //Include buttons
 
 
     @FXML
@@ -108,7 +109,7 @@ public class GameBoardController {
 
    //create circle shape
     public void createShape(int row, int col, Color c) {
-        circle = new Circle((boardGrid.getHeight() / 14) - 1, c);
+        circle = new Circle((boardGrid.getHeight() / (NUM_OF_ROW*2)) - 1, c);
         GridPane.setHalignment(circle, javafx.geometry.HPos.CENTER);
         boardGrid.add(circle, col, row);
         circleList.add(circle);
